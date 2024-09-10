@@ -65,3 +65,7 @@ crashlytics-build.properties
 Disaster_Ready/Library/
 
 Disaster_Ready/Temp/
+
+Disaster_Ready/ProjectSettings/
+
+Disaster_Ready/Logs/
