@@ -9,9 +9,9 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = -9.81f;
 
     // Camera settings
-    public float mouseSensitivity = 100f;
     public Transform playerCamera;
     private float cameraPitch = 0f;
+    [SerializeField] private float mouseSensitivity = 100f;
 
     // Character Controller
     private CharacterController controller;
@@ -23,6 +23,12 @@ public class PlayerMovement : MonoBehaviour
     // Reference to player input
     private float moveX;
     private float moveZ;
+
+    public float MouseSensitivity
+    {
+        get { return mouseSensitivity; }
+        set { mouseSensitivity = Mathf.Clamp(value, 100f, 300f); } // Ensure it's within desired range
+    }
 
     void Start()
     {
