@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 20e62979fd0931f41970c304a65e5ee8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 20e62979fd0931f41970c304a65e5ee8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -111,8 +111,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.847972, y: 0.23152632, z: 0.6705452}
-  m_Center: {x: 0.000000029802322, y: 0.70313513, z: 0.051515117}
+  m_Size: {x: 0.847972, y: 0.23152637, z: 0.60915494}
+  m_Center: {x: 0.000000029802322, y: 0.70313513, z: 0.0175}
 --- !u!1 &9156739637458475046 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -801137020894209072, guid: 20e62979fd0931f41970c304a65e5ee8, type: 3}
