@@ -17,7 +17,7 @@ public class PauseMenu : MonoBehaviour
 
     // The actual sensitivity range (100 to 300)
     public float minSensitivity = 100f;
-    public float maxSensitivity = 300f;
+    public float maxSensitivity = 500f;
 
     // The key used to save/load sensitivity in PlayerPrefs
     private const string MouseSensitivityKey = "MouseSensitivity";
