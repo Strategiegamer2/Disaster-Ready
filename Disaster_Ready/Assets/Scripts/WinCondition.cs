@@ -1,63 +1,57 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
 public class WinCondition : MonoBehaviour
 {
-    // Reference to the parent GameObject (PickUp Items)
+    // Reference to the parent GameObject (PickUp Items for Task 1)
     public Transform pickUpItemsParent;
 
-    // Optional UI Text to display the win message
-    public TextMeshProUGUI winMessageText;
+    // Points for each task
+    public int task1Points = 50;
+    public int task2Points = 50;
 
-    // Time to wait before resetting the level (in seconds)
-    public float resetDelay = 5f;
-
-    private bool hasWon = false;  // To track if the win condition is met
-
-    void Start()
-    {
-        // Hide the win message at the start
-        if (winMessageText != null)
-        {
-            winMessageText.gameObject.SetActive(false);
-        }
-    }
+    private bool task1Complete = false;
+    private bool task2Complete = false;
+    private int totalPoints = 0;
 
     void Update()
     {
-        // Check if the parent object has any children left and if the win condition hasn't been triggered yet
-        if (pickUpItemsParent.childCount == 0 && !hasWon)
+        // Check if Task 1 (collecting all PickUp Items) is complete
+        if (pickUpItemsParent.childCount == 0 && !task1Complete)
         {
-            // Trigger the win condition if no children are left
-            TriggerWinCondition();
+            CompleteTask1();
         }
     }
 
-    void TriggerWinCondition()
+    // Task 1: Collect all PickUp Items
+    void CompleteTask1()
     {
-        Debug.Log("You Win!");
-
-        // If using a UI Text to show the win message
-        if (winMessageText != null)
-        {
-            winMessageText.gameObject.SetActive(true);
-            winMessageText.text = "You Win!";
-        }
-
-        // Set the win state to true
-        hasWon = true;
-
-        // Start the level reset after a delay
-        Invoke("ResetLevel", resetDelay);
+        task1Complete = true;
+        totalPoints += task1Points;
+        Debug.Log("Task 1 complete! Points: " + task1Points);
     }
 
-    void ResetLevel()
+    // Task 2: Set from the PickupDropTrigger script
+    public void CompleteTask2()
     {
-        Debug.Log("Resetting Level...");
+        if (!task2Complete)
+        {
+            task2Complete = true;
+            totalPoints += task2Points;
+            Debug.Log("Task 2 complete! Points: " + task2Points);
+        }
+    }
 
-        // Reload the current scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    // Transition to the results scene
+    public void EndGame()
+    {
+        // Store points and task completion in PlayerPrefs
+        PlayerPrefs.SetInt("TotalPoints", totalPoints);
+        PlayerPrefs.SetInt("Task1Complete", task1Complete ? 1 : 0);
+        PlayerPrefs.SetInt("Task2Complete", task2Complete ? 1 : 0);
+
+        // Load the results screen
+        SceneManager.LoadScene("ResultsScene");  // Replace with your results scene name
     }
 }
