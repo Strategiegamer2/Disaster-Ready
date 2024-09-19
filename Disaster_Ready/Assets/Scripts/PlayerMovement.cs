@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     public float MouseSensitivity
     {
         get { return mouseSensitivity; }
-        set { mouseSensitivity = Mathf.Clamp(value, 100f, 300f); } // Ensure it's within desired range
+        set { mouseSensitivity = Mathf.Clamp(value, 100f, 500f); } // Ensure it's within desired range
     }
 
     void Start()

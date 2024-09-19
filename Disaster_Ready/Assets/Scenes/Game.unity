@@ -206,7 +206,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1592421126}
   m_Direction: 0
   m_MinValue: 100
-  m_MaxValue: 300
+  m_MaxValue: 500
   m_WholeNumbers: 0
   m_Value: 100
   m_OnValueChanged:
@@ -16615,7 +16615,7 @@ MonoBehaviour:
   sensitivitySlider: {fileID: 33303387}
   sensitivityText: {fileID: 1917193024}
   minSensitivity: 100
-  maxSensitivity: 300
+  maxSensitivity: 500
 --- !u!114 &1449088084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19561,7 +19561,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: -5.000061, y: 0}
+  m_AnchoredPosition: {x: -5.0000305, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2073458133
