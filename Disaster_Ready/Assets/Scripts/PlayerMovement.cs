@@ -66,6 +66,13 @@ public class PlayerMovement : MonoBehaviour
 
         // Move the player based on input
         Vector3 move = transform.right * moveX + transform.forward * moveZ;
+
+        // Normalize the movement vector to avoid faster diagonal movement
+        if (move.magnitude > 1f)
+        {
+            move.Normalize();
+        }
+
         controller.Move(move * currentSpeed * Time.deltaTime);
 
         // Jump logic
