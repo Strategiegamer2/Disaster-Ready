@@ -84,7 +84,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -202,7 +202,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -246,15 +246,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ccdc7f9f99241ba4fa383bd09473f152, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.981479
+      value: -10.748
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ccdc7f9f99241ba4fa383bd09473f152, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.148
+      value: 3.148649
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ccdc7f9f99241ba4fa383bd09473f152, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.482
+      value: -0.873
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ccdc7f9f99241ba4fa383bd09473f152, type: 3}
       propertyPath: m_LocalRotation.w
@@ -262,7 +262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ccdc7f9f99241ba4fa383bd09473f152, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ccdc7f9f99241ba4fa383bd09473f152, type: 3}
       propertyPath: m_LocalRotation.y

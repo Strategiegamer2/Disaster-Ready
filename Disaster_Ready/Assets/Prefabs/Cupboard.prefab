@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 528dace1ca00add4eb3d8cf5e27f1e39, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.25
+      value: -8.732
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 528dace1ca00add4eb3d8cf5e27f1e39, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.086
+      value: -2.097
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 528dace1ca00add4eb3d8cf5e27f1e39, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.25
+      value: 6.3170004
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 528dace1ca00add4eb3d8cf5e27f1e39, type: 3}
       propertyPath: m_LocalRotation.w
@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2615453208677245630, guid: 528dace1ca00add4eb3d8cf5e27f1e39, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: -2530386002033848463, guid: 528dace1ca00add4eb3d8cf5e27f1e39, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -55,6 +59,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 528dace1ca00add4eb3d8cf5e27f1e39, type: 3}
       propertyPath: m_Name
       value: Cupboard
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 528dace1ca00add4eb3d8cf5e27f1e39, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 6839973103314091849, guid: 528dace1ca00add4eb3d8cf5e27f1e39, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -65,7 +73,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 92c471ba3716de44983cde5afa7cae82, type: 2}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5297920067510031798, guid: 528dace1ca00add4eb3d8cf5e27f1e39, type: 3}
+    - {fileID: -3301169327930074416, guid: 528dace1ca00add4eb3d8cf5e27f1e39, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -2615453208677245630, guid: 528dace1ca00add4eb3d8cf5e27f1e39, type: 3}
