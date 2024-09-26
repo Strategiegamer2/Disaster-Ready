@@ -8,6 +8,7 @@ TagManager:
   - Water
   - PickupDrop
   - Door
+  - Kill
   layers:
   - Default
   - TransparentFX

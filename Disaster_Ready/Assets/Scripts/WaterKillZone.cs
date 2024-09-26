@@ -6,7 +6,7 @@ public class WaterKillZone : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // Check if the object that entered the trigger is the player
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Kill"))
         {
             KillPlayer();
         }
