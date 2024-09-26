@@ -10,7 +10,6 @@ public class TimelineController : MonoBehaviour
     public float endRate = 100f;                // Ending rate over time for particles
     public float startEnvIntensity = 1f;        // Starting intensity multiplier of environment lighting
     public float endEnvIntensity = 3f;          // Ending intensity multiplier of environment lighting
-    public string nextSceneName;                // Name of the next scene to load
 
     private float timelineDuration;
 
@@ -28,6 +27,9 @@ public class TimelineController : MonoBehaviour
 
         // Set the initial environment lighting intensity
         RenderSettings.ambientIntensity = startEnvIntensity;
+
+        // Subscribe to the timeline end event
+        timelineDirector.stopped += OnTimelineStopped;
 
         // Play the timeline
         timelineDirector.Play();
@@ -49,19 +51,36 @@ public class TimelineController : MonoBehaviour
 
             // Gradually change the environment lighting intensity
             RenderSettings.ambientIntensity = Mathf.Lerp(startEnvIntensity, endEnvIntensity, normalizedTime);
-
-            // Check if the timeline is over
-            if (timelineDirector.time >= timelineDuration)
-            {
-                Debug.Log("Werkt");
-                ChangeScene();
-            }
         }
     }
 
-    // Method to change the scene when the timeline ends
+    // This will be called when the timeline stops
+    void OnTimelineStopped(PlayableDirector director)
+    {
+        Debug.Log("Timeline finished, changing scene...");
+        ChangeScene();
+    }
+
+    // Method to change to the next scene based on the current build index
     void ChangeScene()
     {
-        SceneManager.LoadScene(nextSceneName);
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+
+        // Check if the next scene exists in the build settings
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+            Debug.LogWarning("No more scenes in build settings.");
+        }
+    }
+
+    // Unsubscribe from the event when the object is destroyed to avoid memory leaks
+    void OnDestroy()
+    {
+        timelineDirector.stopped -= OnTimelineStopped;
     }
 }
