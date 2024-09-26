@@ -663,8 +663,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   sprintSpeed: 8
-  jumpForce: 4
-  gravity: -9.81
+  jumpForce: 2
+  gravity: -30
   playerCamera: {fileID: 1571851452}
   mouseSensitivity: 100
 --- !u!136 &38596526
