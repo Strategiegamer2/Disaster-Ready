@@ -671,9 +671,10 @@ MonoBehaviour:
   pointsText: {fileID: 1217803636}
   task1Text: {fileID: 1068487421}
   task2Text: {fileID: 1327862486}
-  task3Text: {fileID: 708072083}
+  task3Text: {fileID: 810457663}
   task1ExplanationText: {fileID: 799222522}
   task2ExplanationText: {fileID: 1982427690}
+  task3ExplanationText: {fileID: 1537059229}
 --- !u!1 &911366138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1738,6 +1739,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 769790168100016570, guid: e082c27f8ea875a44aa95f78abe57884, type: 3}
   m_PrefabInstance: {fileID: 1537059227}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1537059229 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6049092652031143975, guid: e082c27f8ea875a44aa95f78abe57884, type: 3}
+  m_PrefabInstance: {fileID: 1537059227}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1609153685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1976,6 +1988,7 @@ RectTransform:
   - {fileID: 1537059228}
   - {fileID: 1435179285}
   - {fileID: 1997623303}
+  - {fileID: 369460157}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
