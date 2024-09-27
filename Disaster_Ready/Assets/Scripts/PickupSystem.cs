@@ -5,16 +5,12 @@ using TMPro;
 
 public class PickupSystem : MonoBehaviour
 {
-    // Variables for raycasting
-    public float pickupRange = 3f;
-    public Transform cameraTransform;
-
-    // UI elements
-    public GameObject pickupPromptUI;
-    public TextMeshProUGUI pickupText;
+    public float pickupRange = 3f;          // How far the player can interact with items
+    public Transform cameraTransform;       // The player's camera for raycasting
+    public LayerMask interactableLayers;    // Layers that include interactable items (Pickup Layer)
 
     // Inventory UI images (these will be the slots)
-    public List<Image> inventorySlots;  // Drag the images from Unity Inspector into this list
+    public List<Image> inventorySlots;      // Drag the images from Unity Inspector into this list
     public List<InventoryItem> itemDataList = new List<InventoryItem>(); // Holds data for each item
 
     // Inventory List to store picked-up items
@@ -22,15 +18,6 @@ public class PickupSystem : MonoBehaviour
 
     // Reference to the current item we're looking at
     private GameObject currentPickupItem = null;
-
-    // Object Placement
-    private GameObject currentHologram = null;  // Hologram for placement
-    private bool isPlacing = false;  // Flag to track if we're in placement mode
-    private GameObject selectedBuildableItem = null;  // The object selected for placement (hologram)
-
-    // Variables for Y-axis adjustment
-    private float hologramYOffset = 0f;  // Y-offset for adjusting height
-    private float scrollSensitivity = 0.5f;  // Sensitivity for mouse wheel scroll
 
     void Start()
     {
@@ -43,89 +30,88 @@ public class PickupSystem : MonoBehaviour
 
     void Update()
     {
-        HandleRaycast();
-        HandlePickup();
-        HandleObjectPlacement();
+        // This handles any inventory update or placement mode
         HandleInventoryToggle();
-    }
 
-    InventoryItem GetItemData(string itemName)
-    {
-        // Loop through itemDataList to find the matching item by name
-        foreach (InventoryItem item in itemDataList)
+        // Handle raycasting to detect pickup items
+        DetectPickupItem();
+
+        // Handle picking up the item when the player presses E
+        if (currentPickupItem != null && Input.GetKeyDown(KeyCode.E))
         {
-            if (item.itemName == itemName)
-            {
-                // Return the full InventoryItem object if the name matches
-                return item;
-            }
+            HandlePickup(currentPickupItem);
         }
-
-        // If no match is found, return null (or handle this case differently if needed)
-        return null;
     }
 
-    // Handles the raycasting to detect objects with the "Pickup" tag
-    void HandleRaycast()
+    void DetectPickupItem()
     {
         RaycastHit hit;
 
-        // Cast a ray from the camera forward
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, pickupRange))
+        // Cast a ray from the camera to detect objects within the interactable layers
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, pickupRange, interactableLayers))
         {
-            // Check if the object hit has the tag "Pickup"
-            if (hit.collider.CompareTag("Pickup"))
-            {
-                currentPickupItem = hit.collider.gameObject;
+            currentPickupItem = hit.collider.gameObject;  // The detected item
 
-                // Show the pickup prompt
-                pickupPromptUI.SetActive(true);
-                pickupText.text = "Press E to pick up " + currentPickupItem.name;
-            }
-            else
+            // Check if the item has a name that corresponds to an InventoryItem
+            InventoryItem itemData = GetItemData(currentPickupItem.name);
+            if (itemData != null)
             {
-                currentPickupItem = null;
-                pickupPromptUI.SetActive(false);
+                // Show prompt if item is interactable (this can be handled in UIPromptController)
+                Debug.Log("Press E to pick up " + currentPickupItem.name);
             }
         }
         else
         {
-            currentPickupItem = null;
-            pickupPromptUI.SetActive(false);
+            currentPickupItem = null;  // No item detected
         }
     }
 
+
     // Handles picking up the item when the player presses E
-    void HandlePickup()
+    void HandlePickup(GameObject pickupItem)
     {
-        if (currentPickupItem != null && Input.GetKeyDown(KeyCode.E))
+        // Get the item name from the picked-up object
+        string pickedItemName = pickupItem.name;
+
+        // Retrieve the full item data from itemDataList based on the item name
+        InventoryItem pickedItemData = GetItemData(pickedItemName);
+
+        // Ensure that the item exists in the itemDataList
+        if (pickedItemData != null)
         {
-            // Get the item name from the picked-up object
-            string pickedItemName = currentPickupItem.name;
+            // Add this item to the inventory
+            AddToInventory(pickedItemData);
 
-            // Retrieve the full item data from itemDataList based on the item name
-            InventoryItem pickedItemData = GetItemData(pickedItemName);
+            // Update the inventory UI with the new item
+            UpdateInventoryUI(pickedItemData);
 
-            // Ensure that the item exists in the itemDataList
-            if (pickedItemData != null)
+            // Destroy or deactivate the picked-up object
+            Destroy(pickupItem);
+        }
+        else
+        {
+            Debug.LogWarning($"Item '{pickedItemName}' not found in ItemDataList!");
+        }
+    }
+
+    // Return the prompt text for the UIPromptController (if needed)
+    public string GetPromptText()
+    {
+        return currentPickupItem != null ? "Press E to pick up " + currentPickupItem.name : "";
+    }
+
+    // Helper method to get item data by name
+    InventoryItem GetItemData(string itemName)
+    {
+        foreach (InventoryItem item in itemDataList)
+        {
+            if (item.itemName == itemName)
             {
-                // Add this item to the inventory
-                AddToInventory(pickedItemData);
-
-                // Update the inventory UI with the new item
-                UpdateInventoryUI(pickedItemData);
-
-                // Destroy or deactivate the picked-up object
-                Destroy(currentPickupItem);
-
-                // Hide the pickup prompt
-                pickupPromptUI.SetActive(false);
-            }
-            else
-            {
-                Debug.LogWarning($"Item '{pickedItemName}' not found in ItemDataList!");
+                return item;
             }
         }
+
+        return null;
     }
 
     // Add the item to the inventory list
@@ -150,112 +136,8 @@ public class PickupSystem : MonoBehaviour
                 // Store the full item data in the itemDataList for this slot
                 itemDataList[i] = item;
 
-                // Add a listener to detect when this slot is clicked
-                int slotIndex = i;
-                inventorySlots[i].GetComponent<Button>().onClick.AddListener(() => OnInventorySlotClicked(slotIndex));
-
                 break; // Break after assigning to the first available slot
             }
-        }
-    }
-
-    // When an inventory slot is clicked
-    void OnInventorySlotClicked(int slotIndex)
-    {
-        // Get the inventory item associated with this slot
-        InventoryItem selectedItem = itemDataList[slotIndex];
-
-        // Check if the item is buildable
-        if (selectedItem.isBuildable)
-        {
-            StartPlacementMode(selectedItem);
-        }
-    }
-
-    // Start the object placement mode
-    void StartPlacementMode(InventoryItem item)
-    {
-        // Exit time stop by resuming time
-        Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-        // Enter placement mode
-        isPlacing = true;
-
-        // Get the prefab for the selected buildable item (hologram)
-        selectedBuildableItem = item.buildablePrefab;
-
-        // Instantiate the hologram (temporary transparent model) at the player's position
-        if (currentHologram == null && selectedBuildableItem != null)
-        {
-            currentHologram = Instantiate(selectedBuildableItem);
-            // Optional: Set the material or shader to give it a "hologram" appearance
-            SetHologramAppearance(currentHologram);
-        }
-
-        // Reset the Y-offset when entering build mode
-        hologramYOffset = 0f;
-    }
-
-    // Handle object placement (move hologram and place the object)
-    void HandleObjectPlacement()
-    {
-        if (isPlacing && currentHologram != null)
-        {
-            RaycastHit hit;
-
-            // Raycast from the camera to the ground (or surfaces) to move the hologram
-            if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity))
-            {
-                // Move the hologram to the hit point with an adjusted Y position
-                currentHologram.transform.position = new Vector3(hit.point.x, hit.point.y + hologramYOffset, hit.point.z);
-
-                // Rotate the hologram to match the ground normal (optional, if needed)
-                currentHologram.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-            }
-
-            // Adjust the Y position using the mouse wheel
-            float scrollInput = Input.GetAxis("Mouse ScrollWheel");
-            if (scrollInput != 0)
-            {
-                hologramYOffset += scrollInput * scrollSensitivity;
-            }
-
-            // Place the object when the left mouse button is pressed
-            if (Input.GetMouseButtonDown(0)) // Left mouse button
-            {
-                PlaceObject(currentHologram.transform.position);
-            }
-        }
-    }
-
-    // Place the object on the ground
-    void PlaceObject(Vector3 position)
-    {
-        if (currentHologram != null)
-        {
-            // Instantiate the **final prefab** from the item data at the hologram's position
-            if (itemDataList != null)
-            {
-                InventoryItem selectedItem = itemDataList.Find(item => item.buildablePrefab == selectedBuildableItem);
-                if (selectedItem != null && selectedItem.finalPrefab != null)
-                {
-                    Instantiate(selectedItem.finalPrefab, currentHologram.transform.position, currentHologram.transform.rotation);
-                }
-                else
-                {
-                    Debug.LogWarning("Final prefab is not assigned in ItemDataList!");
-                }
-            }
-
-            // Destroy the hologram
-            Destroy(currentHologram);
-
-            // Exit placement mode
-            isPlacing = false;
-            selectedBuildableItem = null;
-            currentHologram = null;
         }
     }
 
@@ -281,19 +163,6 @@ public class PickupSystem : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
-        }
-    }
-
-    // Optional: Set a "hologram" appearance for the object
-    void SetHologramAppearance(GameObject hologram)
-    {
-        // Modify the material or shader here to make the object look like a hologram
-        // This is optional, depending on how you want the hologram to appear
-        Renderer renderer = hologram.GetComponent<Renderer>();
-        if (renderer != null)
-        {
-            // Example: make the material semi-transparent
-            renderer.material.color = new Color(0, 1, 0, 0.5f); // Green with 50% transparency
         }
     }
 }

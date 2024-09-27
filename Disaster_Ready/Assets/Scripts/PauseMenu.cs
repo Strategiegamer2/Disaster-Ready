@@ -16,7 +16,7 @@ public class PauseMenu : MonoBehaviour
     private PlayerMovement playerMovementScript;
 
     // The actual sensitivity range (100 to 300)
-    public float minSensitivity = 100f;
+    public float minSensitivity = 20f;
     public float maxSensitivity = 500f;
 
     // The key used to save/load sensitivity in PlayerPrefs

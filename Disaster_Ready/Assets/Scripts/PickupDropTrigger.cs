@@ -5,6 +5,9 @@ public class PickupDropTrigger : MonoBehaviour
     public WinCondition winCondition;  // Reference to the WinCondition script
     private int objectsInTrigger = 0;  // Counter for objects with "PickupDrop" tag inside the trigger
 
+    // Getter for objects in the trigger
+    public int ObjectsInTrigger => objectsInTrigger;
+
     void OnTriggerEnter(Collider other)
     {
         // Check if the object that entered the trigger has the "PickupDrop" tag

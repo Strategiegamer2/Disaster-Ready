@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 25316396}
   - component: {fileID: 25316395}
   - component: {fileID: 25316394}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Door
   m_TagString: Door
   m_Icon: {fileID: 0}
@@ -177,8 +177,6 @@ MonoBehaviour:
   pickupRange: 3
   startYAxis: 0
   endYAxis: -90
-  pickupPromptUI: {fileID: 434253262}
-  pickupText: {fileID: 507849725}
   isTheDoorOpen: 0
 --- !u!4 &25316396
 Transform:
@@ -279,7 +277,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 962351404}
   m_HandleRect: {fileID: 1592421126}
   m_Direction: 0
-  m_MinValue: 100
+  m_MinValue: 20
   m_MaxValue: 500
   m_WholeNumbers: 0
   m_Value: 100
@@ -5429,7 +5427,7 @@ GameObject:
   - component: {fileID: 213093693}
   - component: {fileID: 213093692}
   - component: {fileID: 213093691}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Window
   m_TagString: Door
   m_Icon: {fileID: 0}
@@ -5473,8 +5471,6 @@ MonoBehaviour:
   pickupRange: 3
   startYAxis: 0
   endYAxis: -90
-  pickupPromptUI: {fileID: 434253262}
-  pickupText: {fileID: 507849725}
   isTheDoorOpen: 1
 --- !u!4 &213093693
 Transform:
@@ -10494,7 +10490,7 @@ GameObject:
   - component: {fileID: 299522949}
   - component: {fileID: 299522948}
   - component: {fileID: 299522947}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Food
   m_TagString: Pickup
   m_Icon: {fileID: 0}
@@ -10782,10 +10778,10 @@ GameObject:
   - component: {fileID: 427011048}
   - component: {fileID: 427011047}
   - component: {fileID: 427011046}
-  - component: {fileID: 427011045}
   - component: {fileID: 427011044}
   - component: {fileID: 427011049}
   - component: {fileID: 427011050}
+  - component: {fileID: 427011051}
   m_Layer: 0
   m_Name: Water
   m_TagString: Water
@@ -10805,36 +10801,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2974982116f974d4db51f57a5be014ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 120
-  targetY: -3
-  moveSpeed: 0.05
---- !u!54 &427011045
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427011043}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  timer: 65
+  secondTargetY: -4.14
+  secondTargetTime: 40
+  targetY: 0
+  moveSpeed: 1
+  pickupDropTrigger: {fileID: 378452446}
 --- !u!23 &427011046
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10934,6 +10906,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9a1b15218ff0b9428b6ad9ee7c88766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &427011051
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427011043}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &434253262
 GameObject:
   m_ObjectHideFlags: 0
@@ -11944,8 +11943,6 @@ MonoBehaviour:
   pickupRange: 3
   startYAxis: 0
   endYAxis: 0
-  pickupPromptUI: {fileID: 434253262}
-  pickupText: {fileID: 507849725}
   isTheDoorOpen: 0
 --- !u!4 &668013876
 Transform:
@@ -11955,13 +11952,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668013873}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.3000002, y: 1.7817, z: -9.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1054763386438394708}
-  m_Father: {fileID: 1140964053}
+  m_Father: {fileID: 1600255400}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &671109630
 GameObject:
@@ -14455,7 +14452,7 @@ GameObject:
   - component: {fileID: 838947295}
   - component: {fileID: 838947297}
   - component: {fileID: 838947296}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Window (1)
   m_TagString: Door
   m_Icon: {fileID: 0}
@@ -14515,8 +14512,6 @@ MonoBehaviour:
   pickupRange: 3
   startYAxis: 0
   endYAxis: -90
-  pickupPromptUI: {fileID: 434253262}
-  pickupText: {fileID: 507849725}
   isTheDoorOpen: 1
 --- !u!1 &850199339
 GameObject:
@@ -14635,7 +14630,7 @@ GameObject:
   - component: {fileID: 867570767}
   - component: {fileID: 867570766}
   - component: {fileID: 867570765}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Window2
   m_TagString: Door
   m_Icon: {fileID: 0}
@@ -14679,8 +14674,6 @@ MonoBehaviour:
   pickupRange: 3
   startYAxis: 90
   endYAxis: 180
-  pickupPromptUI: {fileID: 434253262}
-  pickupText: {fileID: 507849725}
   isTheDoorOpen: 1
 --- !u!4 &867570767
 Transform:
@@ -20432,7 +20425,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 25316396}
-  - {fileID: 668013876}
   - {fileID: 1998676913}
   - {fileID: 8638232338403050901}
   - {fileID: 1600255400}
@@ -20726,7 +20718,7 @@ GameObject:
   - component: {fileID: 1292233801}
   - component: {fileID: 1292233803}
   - component: {fileID: 1292233802}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Window.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20943,7 +20935,7 @@ GameObject:
   - component: {fileID: 1378173299}
   - component: {fileID: 1378173298}
   - component: {fileID: 1378173297}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Food
   m_TagString: Pickup
   m_Icon: {fileID: 0}
@@ -21080,9 +21072,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1449088082}
   - component: {fileID: 1449088081}
-  - component: {fileID: 1449088085}
   - component: {fileID: 1449088083}
   - component: {fileID: 1449088084}
+  - component: {fileID: 1449088086}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -21104,8 +21096,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupRange: 3
   cameraTransform: {fileID: 1571851452}
-  pickupPromptUI: {fileID: 434253262}
-  pickupText: {fileID: 507849725}
+  interactableLayers:
+    serializedVersion: 2
+    m_Bits: 64
   inventorySlots:
   - {fileID: 993277385}
   - {fileID: 198141838}
@@ -21195,7 +21188,7 @@ MonoBehaviour:
   settingsMenuUI: {fileID: 676260216}
   sensitivitySlider: {fileID: 33303387}
   sensitivityText: {fileID: 1917193024}
-  minSensitivity: 100
+  minSensitivity: 20
   maxSensitivity: 500
 --- !u!114 &1449088084
 MonoBehaviour:
@@ -21214,7 +21207,7 @@ MonoBehaviour:
   task1Points: 50
   task2Points: 50
   task3Points: 50
---- !u!114 &1449088085
+--- !u!114 &1449088086
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -21223,14 +21216,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1449088080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8fb355b75ba5c84d90dd455f12e22cf, type: 3}
+  m_Script: {fileID: 11500000, guid: d74112c40c6043e45a989238f39ebd95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pickupRange: 3
   playerCamera: {fileID: 1571851452}
-  holdPosition: {fileID: 1858351184}
   pickupPromptUI: {fileID: 434253262}
   pickupText: {fileID: 507849725}
+  interactableLayers:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1473300922
 GameObject:
   m_ObjectHideFlags: 0
@@ -21261,8 +21256,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 38596529}
-  - {fileID: 706381388}
   - {fileID: 427011048}
+  - {fileID: 706381388}
   - {fileID: 378452444}
   - {fileID: 1097798248}
   - {fileID: 2027524273}
@@ -21679,6 +21674,7 @@ Transform:
   - {fileID: 1129453414588316012}
   - {fileID: 8133328840002132221}
   - {fileID: 5790990916505551199}
+  - {fileID: 668013876}
   m_Father: {fileID: 1140964053}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1644841002
@@ -22531,7 +22527,7 @@ GameObject:
   - component: {fileID: 1894280563}
   - component: {fileID: 1894280565}
   - component: {fileID: 1894280564}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Window.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28291,7 +28287,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2399473550717329685}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: group1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28551,7 +28547,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6271075069263428396}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pasted__group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28945,7 +28941,7 @@ GameObject:
   - component: {fileID: 1054763387719990779}
   - component: {fileID: 4110834433868444254}
   - component: {fileID: 2227145923400353428}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Door (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30349,7 +30345,8 @@ GameObject:
   - component: {fileID: 670517113893897180}
   - component: {fileID: 3362729366657677079}
   - component: {fileID: 3362729366657677080}
-  m_Layer: 0
+  - component: {fileID: 3362729366657677081}
+  m_Layer: 6
   m_Name: Sandbag
   m_TagString: PickupDrop
   m_Icon: {fileID: 0}
@@ -30739,7 +30736,8 @@ GameObject:
   - component: {fileID: 1092292618280865077}
   - component: {fileID: 2939844575297632768}
   - component: {fileID: 2939844575297632769}
-  m_Layer: 0
+  - component: {fileID: 2939844575297632770}
+  m_Layer: 6
   m_Name: Sandbag (2)
   m_TagString: PickupDrop
   m_Icon: {fileID: 0}
@@ -30789,7 +30787,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6939106573770866614}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: food
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31071,7 +31069,8 @@ GameObject:
   - component: {fileID: 264779522145391800}
   - component: {fileID: 2614437283378946163}
   - component: {fileID: 2614437283378946164}
-  m_Layer: 0
+  - component: {fileID: 2614437283378946165}
+  m_Layer: 6
   m_Name: Sandbag (1)
   m_TagString: PickupDrop
   m_Icon: {fileID: 0}
@@ -31823,7 +31822,7 @@ Transform:
   m_GameObject: {fileID: 3142524435600087353}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.15429544, z: -0, w: 0.9880248}
-  m_LocalPosition: {x: -9.333126, y: 0.889, z: -5.344022}
+  m_LocalPosition: {x: -9.333126, y: 0.894, z: -5.344022}
   m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -32428,7 +32427,7 @@ GameObject:
   - component: {fileID: 7507742642776432166}
   - component: {fileID: 4805578273151548844}
   - component: {fileID: 8259457867215046159}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pasted__pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32550,6 +32549,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2614437283378946165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777888185849329005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8fb355b75ba5c84d90dd455f12e22cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 1571851452}
+  holdPosition: {fileID: 1858351184}
 --- !u!33 &2662745266370124389
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -32663,6 +32676,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2939844575297632770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452523207881272544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8fb355b75ba5c84d90dd455f12e22cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 1571851452}
+  holdPosition: {fileID: 1858351184}
 --- !u!4 &3019783389835517250
 Transform:
   m_ObjectHideFlags: 0
@@ -33321,6 +33348,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.016913498, y: 0.0046880436, z: 0.010000003}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3362729366657677081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1319233302776308233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8fb355b75ba5c84d90dd455f12e22cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 1571851452}
+  holdPosition: {fileID: 1858351184}
 --- !u!65 &3404727565695349805
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34282,6 +34323,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6448833722773122297, guid: 3b3ab1d732f338a4cba016bd80d33a6b, type: 3}
+      propertyPath: m_TagString
+      value: Kill
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -34507,7 +34552,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4951081209528807704}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35112,7 +35157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3761598733560711563}
   - component: {fileID: 4573461165300142898}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FoodStack
   m_TagString: Pickup
   m_Icon: {fileID: 0}
@@ -35932,7 +35977,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5298789215679997355}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: group2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36158,7 +36203,7 @@ GameObject:
   - component: {fileID: 7114699910782715004}
   - component: {fileID: 5065587357292332021}
   - component: {fileID: 4811941173721962495}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36215,7 +36260,7 @@ GameObject:
   - component: {fileID: 4642198073408167590}
   - component: {fileID: 6150168712101073250}
   - component: {fileID: 5780816309338442203}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Window.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36267,7 +36312,7 @@ GameObject:
   - component: {fileID: 5411120348832014658}
   - component: {fileID: 8083793411370342878}
   - component: {fileID: 8083793411370342879}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Food
   m_TagString: Pickup
   m_Icon: {fileID: 0}
@@ -36285,7 +36330,7 @@ GameObject:
   - component: {fileID: 5349555626449094576}
   - component: {fileID: 5411120348630893510}
   - component: {fileID: 8083793411839245146}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pasted__pasted__pCylinder1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36316,7 +36361,7 @@ Transform:
   m_GameObject: {fileID: 5300515543486298282}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0403, y: -0.51363, z: -4.14}
+  m_LocalPosition: {x: -0.961, y: -0.51363, z: -4.14}
   m_LocalScale: {x: 137.8083, y: 137.80833, z: 137.8083}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -37144,7 +37189,7 @@ GameObject:
   - component: {fileID: 2563657931544266987}
   - component: {fileID: 8201183559481159466}
   - component: {fileID: 3579261696803688080}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pSphere1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40257,7 +40302,7 @@ GameObject:
   - component: {fileID: 3357733815350840292}
   - component: {fileID: 2562575355122013129}
   - component: {fileID: 3022874779141420586}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pasted__pSphere1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42459,7 +42504,7 @@ GameObject:
   - component: {fileID: 4633906178429110832}
   - component: {fileID: 7469789906132385530}
   - component: {fileID: 8983267456373890864}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Knife
   m_TagString: Pickup
   m_Icon: {fileID: 0}

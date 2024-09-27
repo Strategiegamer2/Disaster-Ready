@@ -1,75 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
-public class DoorRotation : MonoBehaviour
+public class DoorRotation : MonoBehaviour, IInteractable
 {
     public Transform playerCamera;
     public float pickupRange = 3f;
     public float startYAxis;
     public float endYAxis;
 
-    public GameObject pickupPromptUI;
-    public TextMeshProUGUI pickupText;
-
     public bool isTheDoorOpen;
 
-    void Start()
-    {
-        pickupPromptUI.SetActive(false);
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        CheckDoorInRange();
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (IsDoorInRange())
-            {
-                OpenDoor();
-            }
-        }
+        // Optionally, we could add other updates related to door animations here if needed.
     }
 
-    void CheckDoorInRange()
+    // Implement the Interact method from the IInteractable interface
+    public void Interact()
     {
-        if (IsDoorInRange())
-        {
-            pickupPromptUI.SetActive(true);
-            pickupText.text = isTheDoorOpen ? "Press E to Close the Door" : "Press E to Open the Door";
-        }
-        else
-        {
-            pickupPromptUI.SetActive(false);
-        }
+        OpenDoor();
     }
 
-    bool IsDoorInRange()
+    // Return the prompt text for the UIPromptController
+    public string GetPromptText()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, pickupRange))
-        {
-            if (hit.transform == this.transform)
-            {
-                return true;
-            }
-        }
-        return false;
+        return isTheDoorOpen ? "Press E to close the door" : "Press E to open the door";
     }
 
     void OpenDoor()
     {
         if (!isTheDoorOpen)
         {
-            // Open the door (rotate to -90 degrees)
+            // Open the door (rotate to end Y axis)
             iTween.RotateTo(this.gameObject, iTween.Hash("rotation", new Vector3(0, endYAxis, 0), "speed", 50f, "easetype", iTween.EaseType.easeOutQuart));
         }
         else
         {
-            // Close the door (rotate back to 0 degrees)
+            // Close the door (rotate back to start Y axis)
             iTween.RotateTo(this.gameObject, iTween.Hash("rotation", new Vector3(0, startYAxis, 0), "speed", 50f, "easetype", iTween.EaseType.easeOutQuart));
         }
 
